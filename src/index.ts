@@ -119,9 +119,11 @@ async function runAgent() {
       logger.info(`Using dynamic timeFrom: ${timeFrom}`);
     }
 
+    let newsData;
+
     if (!config.skipAlphaVantage) {
       logger.info('Fetching financial news...');
-      const newsData = await fetchFinancialNews({
+      newsData = await fetchFinancialNews({
         topics: config.alphavantage.topics,
         limit: config.alphavantage.limit,
         timeFrom: timeFrom,
@@ -138,7 +140,7 @@ async function runAgent() {
       logger.info('Skipping Alpha Vantage API call');
     }
 
-    const tweetContent = await processNewsWithGemini(undefined, config.gemini.prompt, config.gemini.topics);
+    const tweetContent = await processNewsWithGemini(newsData, config.gemini.prompt, config.gemini.topics);
 
     logger.info('Posting tweet to Twitter...');
     await postTweet(tweetContent);
