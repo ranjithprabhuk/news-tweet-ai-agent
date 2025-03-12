@@ -86,7 +86,15 @@ Edit `config.json` to customize the agent's behavior:
   "gemini": {
     "apiKey": "YOUR_GEMINI_API_KEY",
     "model": "gemini-pro",
-    "prompt": "Create an engaging tweet about these financial news items..."
+    "prompt": "Create an engaging tweet about these financial news items...",
+    "topics": [
+      "Artificial Intelligence",
+      "Cryptocurrency",
+      "Climate Change",
+      "Work From Home",
+      "Electric Vehicles",
+      "Space Exploration"
+    ]
   },
   "twitter": {
     "apiKey": "YOUR_TWITTER_API_KEY",
@@ -108,7 +116,8 @@ Edit `config.json` to customize the agent's behavior:
     "level": "info",
     "saveToFile": true,
     "filePath": "logs/agent.log"
-  }
+  },
+  "skipAlphaVantageApi": false
 }
 ```
 
@@ -126,6 +135,7 @@ Edit `config.json` to customize the agent's behavior:
   - **apiKey**: Your Gemini API key
   - **model**: Gemini model to use
   - **prompt**: Custom prompt for generating tweets
+  - **topics**: Array of topics to genera\*\*: Custom prompt for generating tweets
 
 - **twitter**: Twitter API credentials
 
@@ -148,9 +158,12 @@ Edit `config.json` to customize the agent's behavior:
   - **cron**: Cron expression for scheduling
 
 - **logging**: Logging configuration
+
   - **level**: Log level (error, warn, info, debug)
   - **saveToFile**: Whether to save logs to a file
   - **filePath**: Path to the log file
+
+- **skipAlphaVantageApi**: Whether to skip fetching news from AlphaVantage API
 
 ## API Endpoints
 

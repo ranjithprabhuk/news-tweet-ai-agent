@@ -119,21 +119,26 @@ async function runAgent() {
       logger.info(`Using dynamic timeFrom: ${timeFrom}`);
     }
 
-    logger.info('Fetching financial news...');
-    const newsData = await fetchFinancialNews({
-      topics: config.alphavantage.topics,
-      limit: config.alphavantage.limit,
-      timeFrom: timeFrom,
-      sort,
-    });
+    if (!config.skipAlphaVantage) {
+      logger.info('Fetching financial news...');
+      const newsData = await fetchFinancialNews({
+        topics: config.alphavantage.topics,
+        limit: config.alphavantage.limit,
+        timeFrom: timeFrom,
+        sort,
+      });
 
-    if (!newsData.feed || newsData.feed.length === 0) {
-      logger.warn('No news items found in the specified time range');
-      return false;
+      logger.info(`Processing ${newsData.feed.length} news items with Gemini AI...`);
+
+      if (!newsData.feed || newsData.feed.length === 0) {
+        logger.warn('No news items found in the specified time range');
+        return false;
+      }
+    } else {
+      logger.info('Skipping Alpha Vantage API call');
     }
 
-    logger.info(`Processing ${newsData.feed.length} news items with Gemini AI...`);
-    const tweetContent = await processNewsWithGemini(newsData, config.gemini.prompt);
+    const tweetContent = await processNewsWithGemini(undefined, config.gemini.prompt, config.gemini.topics);
 
     logger.info('Posting tweet to Twitter...');
     await postTweet(tweetContent);
