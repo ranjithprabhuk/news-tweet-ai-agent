@@ -40,11 +40,7 @@ npm install
 ```
 
 3. Update the configuration:
-   Copy `config.json` and edit it with your API keys and preferences:
-
-```bash
-cp config.example.json config.json
-```
+   Update the configuration file `config.json` and edit it with your API keys and preferences:
 
 4. Build the TypeScript code:
 
