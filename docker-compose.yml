@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  financial-news-agent:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./config.json:/usr/src/app/config.json
+    environment:
+      - NODE_ENV=production
+      - CONFIG_PATH=/usr/src/app/config.json
+    restart: unless-stopped
