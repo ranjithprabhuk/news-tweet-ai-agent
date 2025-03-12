@@ -121,7 +121,7 @@ async function runAgent() {
 
     let newsData;
 
-    if (!config.skipAlphaVantage) {
+    if (!config.skipAlphaVantageApi) {
       logger.info('Fetching financial news...');
       newsData = await fetchFinancialNews({
         topics: config.alphavantage.topics,
