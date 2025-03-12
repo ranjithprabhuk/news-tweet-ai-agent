@@ -9,7 +9,10 @@ import { setupLogger, logger } from './utils/logger';
 import { formatDate } from './utils/date';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3010;
+
+// Add this before your fetch call
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 // Setup logger
 setupLogger();
@@ -105,6 +108,7 @@ async function runAgent() {
 
     const config = loadConfig();
     let timeFrom = config.alphavantage.timeFrom;
+    let sort = config.alphavantage.sort;
 
     // If dynamic time from is enabled, calculate the time from based on interval
     if (config.interval?.dynamicTimeFrom) {
@@ -120,6 +124,7 @@ async function runAgent() {
       topics: config.alphavantage.topics,
       limit: config.alphavantage.limit,
       timeFrom: timeFrom,
+      sort,
     });
 
     if (!newsData.feed || newsData.feed.length === 0) {

@@ -4,7 +4,7 @@ services:
   financial-news-agent:
     build: .
     ports:
-      - '3000:3000'
+      - '3010:3010'
     volumes:
       - ./config.json:/usr/src/app/config.json
     environment:

@@ -1,4 +1,4 @@
-# Financial News AI Agent
+# News Tweet AI Agent
 
 This Node.js application fetches financial news from AlphaVantage, processes it using Google's Gemini AI, and posts the generated content to Twitter.
 
@@ -65,8 +65,8 @@ npm start
 2. Build and run using Docker:
 
 ```bash
-docker build -t financial-news-ai-agent .
-docker run -p 3000:3000 -v $(pwd)/config.json:/usr/src/app/config.json financial-news-ai-agent
+docker build -t news-tweet-ai-agent .
+docker run -p 3010:3010 -v $(pwd)/config.json:/usr/src/app/config.json news-tweet-ai-agent
 ```
 
 3. Alternatively, use Docker Compose:
